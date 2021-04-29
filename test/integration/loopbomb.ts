@@ -158,6 +158,7 @@ describe("Minting process", () => {
     const args = [bufferCV(assetHash),
                   bufferCV(gaiaUsername),
                   uintCV(5),
+                  uintCV(10000),
                   listCV([standardPrincipalCV(keys['project1'].stacksAddress), standardPrincipalCV(keys['project2'].stacksAddress),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG")]),
                   listCV([uintCV(500), uintCV(500),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0)])]
     let result = await callContract(new BigNum(0), "contract-base", contractName, "mint-token", args)
@@ -183,8 +184,7 @@ describe("Minting process", () => {
 
   it("Should mint a new edition of an existing token, using the mint-edition function", async () => {
     const nftIndex = uintCV(0)
-    const nextBidAmount = uintCV(10000)
-    let args = [nftIndex, nextBidAmount]
+    let args = [nftIndex]
     let result = await callContract(new BigNum(0), "contract-base", contractName, "mint-edition", args)
     assert.equal(result.tx_result.repr, '(ok u1)', result)
   });
@@ -201,6 +201,7 @@ describe("Minting process", () => {
     const args = [bufferCV(assetHash),
                   bufferCV(gaiaUsername),
                   uintCV(2),
+                  uintCV(10000),
                   listCV([standardPrincipalCV(keys['project1'].stacksAddress), standardPrincipalCV(keys['project2'].stacksAddress),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG")]),
                   listCV([uintCV(3000), uintCV(1000),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0)])]
     let result = await callContract(new BigNum(0), "contract-base", contractName, "mint-token", args)
@@ -221,8 +222,7 @@ describe("Minting process", () => {
 
   it("Should mint two new editions of an existing token, using the mint-edition function. The second one should fail.", async () => {
     const nftIndex = uintCV(2)
-    const nextBidAmount = uintCV(20000)
-    let args = [nftIndex, nextBidAmount]
+    let args = [nftIndex]
     let result = await callContract(new BigNum(0), "project1", contractName, "mint-edition", args)
     assert.equal(result.tx_result.repr, '(ok u3)', result)
 
@@ -236,6 +236,7 @@ describe("Minting process", () => {
     const args = [bufferCV(assetHash),
                   bufferCV(gaiaUsername),
                   uintCV(5),
+                  uintCV(50000),
                   listCV([standardPrincipalCV(keys['project1'].stacksAddress), standardPrincipalCV(keys['project2'].stacksAddress),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG"),standardPrincipalCV("STFJEDEQB1Y1CQ7F04CS62DCS5MXZVSNXXN413ZG")]),
                   listCV([uintCV(4000), uintCV(4000),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0),uintCV(0)])]
     let result = await callContract(new BigNum(0), "contract-base", contractName, "mint-token", args)
@@ -253,8 +254,7 @@ describe("Minting process", () => {
     let result = await callContract(new BigNum(0), "contract-base", contractName, "set-sale-data", args)
     assert.equal(result.tx_result.repr, '(ok u4)', result)
 
-    const nextBidAmount = uintCV(50000)
-    args = [nftIndex, nextBidAmount]
+    args = [nftIndex]
     result = await callContract(new BigNum(0), "project1", contractName, "mint-edition", args)
     assert.equal(result.tx_result.repr, '(ok u5)', result)
   });
